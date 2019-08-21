@@ -10,9 +10,9 @@ import org.junit.Assert.assertThat
 import org.junit.Test
 
 
-class NewsRemoteDataSourceTest {
+class NewRemoteDataSourceTest {
 
-    private val newsRemoteDataSource = NewsRemoteDataSource()
+    private val newsRemoteDataSource = NewRemoteDataSource()
 
     private val objectMapper = ObjectMapper()
 
