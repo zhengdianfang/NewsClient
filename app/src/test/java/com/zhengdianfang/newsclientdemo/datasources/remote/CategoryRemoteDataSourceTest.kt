@@ -5,6 +5,7 @@ import com.zhengdianfang.newsclientdemo.model.Category
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.hamcrest.CoreMatchers.`is`
+import org.junit.After
 import org.junit.Assert.*
 import org.junit.Test
 
@@ -20,6 +21,11 @@ class CategoryRemoteDataSourceTest {
         Category(1, "category1", 1),
         Category(2, "category2", 2)
     )
+
+    @After
+    fun tearDown() {
+        mockWebServer.shutdown()
+    }
 
     @Test
     fun `should return categories when request category api` () {
@@ -40,6 +46,23 @@ class CategoryRemoteDataSourceTest {
         val takeRequest = mockWebServer.takeRequest()
         assertThat(takeRequest.path, `is`("/categories"))
         assertThat(takeRequest.method, `is`("GET"))
+    }
 
+    @Test
+    fun `should return empty list when request error` () {
+        //given
+        mockWebServer.enqueue(
+            MockResponse().setResponseCode(500)
+        )
+        mockWebServer.start(3000)
+
+        //when
+        val testSubscriber = categoryRemoteDataSource.getCategories().test()
+
+        //then
+        testSubscriber.assertNoValues()
+        val takeRequest = mockWebServer.takeRequest()
+        assertThat(takeRequest.path, `is`("/categories"))
+        assertThat(takeRequest.method, `is`("GET"))
     }
 }

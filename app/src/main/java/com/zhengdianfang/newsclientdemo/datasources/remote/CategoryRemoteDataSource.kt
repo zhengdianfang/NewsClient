@@ -2,6 +2,7 @@ package com.zhengdianfang.newsclientdemo.datasources.remote
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import com.zhengdianfang.newsclientdemo.api.CategoryServices
 import com.zhengdianfang.newsclientdemo.api.NewsServices
 import com.zhengdianfang.newsclientdemo.model.Category
 import com.zhengdianfang.newsclientdemo.model.New
@@ -21,6 +22,8 @@ class CategoryRemoteDataSource {
     }
 
     fun getCategories(): Flowable<List<Category>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return client.create(CategoryServices::class.java)
+            .getCategories()
+            .onErrorResumeNext(Flowable.empty())
     }
 }
