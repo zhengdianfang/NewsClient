@@ -2,9 +2,11 @@ package com.zhengdianfang.newsclientdemo.repository
 
 import com.zhengdianfang.newsclientdemo.datasources.remote.NewRemoteDataSource
 import com.zhengdianfang.newsclientdemo.model.New
+import com.zhengdianfang.newsclientdemo.utils.ReflectionUtils
 import io.reactivex.Flowable
-import org.junit.Assert.*
+import org.junit.Before
 import org.junit.Test
+import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
@@ -12,9 +14,8 @@ import org.mockito.MockitoAnnotations
 class NewRepositoryTest {
 
     @Mock
-    private lateinit var newRemoteDataSource: NewRemoteDataSource
+    private lateinit var mockNewRemoteDataSource: NewRemoteDataSource
 
-    private val newRepository = NewRepository()
 
     init {
         MockitoAnnotations.initMocks(this)
@@ -23,6 +24,7 @@ class NewRepositoryTest {
     @Test
     fun `should return new list when get from data source`() {
         //given
+        val newRepository = NewRepository()
         val mockNews = listOf(
             New("123", "title1",
                 "2019.01.03", 1, "zdf",
@@ -32,7 +34,8 @@ class NewRepositoryTest {
                 "2019.01.03", 2, "zdf",
                 "", "", "", "")
         )
-        `when`(newRemoteDataSource.getNews()).thenReturn(Flowable.just(mockNews))
+        `when`(mockNewRemoteDataSource.getNews()).thenReturn(Flowable.just(mockNews))
+        ReflectionUtils.refectSetValue(newRepository, "newRemoteDataSource", mockNewRemoteDataSource)
 
         //when
         val testSubscriber = newRepository.getNews(null).test()
@@ -41,6 +44,7 @@ class NewRepositoryTest {
         testSubscriber.assertValue { data ->
             data.isNotEmpty() && data.size == 2 && data.first().title == "title1"
         }
+
 
     }
 }
