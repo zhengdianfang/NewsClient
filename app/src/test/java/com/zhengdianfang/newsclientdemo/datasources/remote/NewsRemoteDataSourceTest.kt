@@ -30,7 +30,7 @@ class NewsRemoteDataSourceTest {
             .setResponseCode(200)
             .setBody(objectMapper.writeValueAsString(mockNews)))
 
-        mockServer.start()
+        mockServer.start(3000)
         mockServer.url("/news")
         //when
         val testSubscriber = newsRemoteDataSource.getNews().test()

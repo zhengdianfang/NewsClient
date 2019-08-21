@@ -1,6 +1,6 @@
 package com.zhengdianfang.newsclientdemo.model
 
-data class New(
+data class New (
     val uniqueKey: String,
     val title: String,
     val date: String,
