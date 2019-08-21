@@ -17,8 +17,16 @@ class NewsRemoteDataSource {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
     }
-    fun getNews(): Flowable<List<New>> {
-        return client.create(NewsServices::class.java).getNews()
 
+    fun getNews(category: Int): Flowable<List<New>> {
+        return client.create(NewsServices::class.java)
+            .getNews(category)
+            .onErrorResumeNext(Flowable.empty())
+    }
+
+    fun getNews(): Flowable<List<New>> {
+        return client.create(NewsServices::class.java)
+            .getNews(null)
+            .onErrorResumeNext(Flowable.empty())
     }
 }
