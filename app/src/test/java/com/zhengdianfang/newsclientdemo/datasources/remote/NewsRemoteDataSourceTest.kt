@@ -1,6 +1,7 @@
 package com.zhengdianfang.newsclientdemo.datasources.remote
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.zhengdianfang.newsclientdemo.api.ApiClient
 import com.zhengdianfang.newsclientdemo.model.News
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -12,7 +13,7 @@ import org.junit.Test
 
 class NewsRemoteDataSourceTest {
 
-    private val newsRemoteDataSource = NewsRemoteDataSource()
+    private val newsRemoteDataSource = NewsRemoteDataSource(ApiClient.TEST_INSTANCE)
 
     private val objectMapper = ObjectMapper()
 
@@ -66,11 +67,11 @@ class NewsRemoteDataSourceTest {
 
         mockServer.start(3000)
         //when
-        val category = 1
+        val category = 1L
         val testSubscriber = newsRemoteDataSource.getNewsList(category).test()
 
         //then
-        testSubscriber.assertValue { data ->  data.isNotEmpty() && data.size == 1 && data.first().category == 1 }
+        testSubscriber.assertValue { data ->  data.isNotEmpty() && data.size == 1 && data.first().category == category }
         val takeRequest = mockServer.takeRequest()
         assertThat(takeRequest.path, `is`("/news?category=1"))
         assertThat(takeRequest.method, `is`("GET"))

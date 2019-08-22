@@ -7,6 +7,7 @@ import com.zhengdianfang.newsclientdemo.utils.ReflectionUtils
 import io.reactivex.Flowable
 import org.junit.Test
 import org.mockito.ArgumentMatchers
+import org.mockito.ArgumentMatchers.anyLong
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.anyInt
@@ -38,7 +39,7 @@ class NewsPresenterTest {
                 "", "", "", "")
         )
 
-        `when`(mockNewRepository.getNewsList(anyInt())).thenReturn(Flowable.just(mockNews))
+        `when`(mockNewRepository.getNewsList(anyLong())).thenReturn(Flowable.just(mockNews))
         ReflectionUtils.refectSetValue(newsPresenter, "newsRepository", mockNewRepository)
         newsPresenter.attach(mockView)
         //when
@@ -53,7 +54,7 @@ class NewsPresenterTest {
     fun `should execute showEmptyView function when not receiver news list data`() {
         //given
         val newsPresenter = NewsPresenter()
-        `when`(mockNewRepository.getNewsList(anyInt())).thenReturn(Flowable.just(emptyList()))
+        `when`(mockNewRepository.getNewsList(anyLong())).thenReturn(Flowable.just(emptyList()))
         ReflectionUtils.refectSetValue(newsPresenter, "newsRepository", mockNewRepository)
         newsPresenter.attach(mockView)
         //when

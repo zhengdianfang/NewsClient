@@ -79,7 +79,7 @@ class NewsRepositoryTest {
 
         //then
         testSubscriber.assertValue { data ->
-            data.isNotEmpty() && data.size == 1 && data.first().category == 1
+            data.isNotEmpty() && data.size == 1 && data.first().category == 1L
         }
     }
 }

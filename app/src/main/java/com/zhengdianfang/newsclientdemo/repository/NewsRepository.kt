@@ -1,5 +1,6 @@
 package com.zhengdianfang.newsclientdemo.repository
 
+import com.zhengdianfang.newsclientdemo.api.ApiClient
 import com.zhengdianfang.newsclientdemo.datasources.remote.NewsRemoteDataSource
 import com.zhengdianfang.newsclientdemo.model.News
 import io.reactivex.Flowable
@@ -8,9 +9,9 @@ import io.reactivex.schedulers.Schedulers
 
 class NewsRepository {
 
-    private val newRemoteDataSource = NewsRemoteDataSource()
+    private val newRemoteDataSource = NewsRemoteDataSource(ApiClient.INSTANCE)
 
-    fun getNewsList(category: Int?): Flowable<List<News>> {
+    fun getNewsList(category: Long?): Flowable<List<News>> {
         return newRemoteDataSource.getNewsList()
             .concatMap{ data -> Flowable.fromIterable(data) }
             .filter { item -> category == null || item.category == category }

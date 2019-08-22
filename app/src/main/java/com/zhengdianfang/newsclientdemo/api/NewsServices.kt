@@ -8,5 +8,5 @@ import retrofit2.http.GET
 interface NewsServices {
 
    @GET("/news")
-   fun getNewsList(@Query("category") category: Int?): Flowable<List<News>>
+   fun getNewsList(@Query("category") category: Long?): Flowable<List<News>>
 }

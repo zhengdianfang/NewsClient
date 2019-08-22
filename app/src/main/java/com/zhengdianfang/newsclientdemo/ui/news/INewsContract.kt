@@ -11,6 +11,6 @@ interface INewsContract {
     }
 
     interface Presenter: IBasePresenter<IView> {
-        fun requestNewsList(category: Int)
+        fun requestNewsList(category: Long)
     }
 }

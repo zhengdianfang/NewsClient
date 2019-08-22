@@ -1,13 +1,20 @@
 package com.zhengdianfang.newsclientdemo.datasources.remote
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import com.zhengdianfang.newsclientdemo.api.ApiClient
 import com.zhengdianfang.newsclientdemo.model.Category
+import com.zhengdianfang.newsclientdemo.utils.ReflectionUtils
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.After
 import org.junit.Assert.*
+import org.junit.Before
 import org.junit.Test
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.jackson.JacksonConverterFactory
 
 class CategoryRemoteDataSourceTest {
 
@@ -15,12 +22,22 @@ class CategoryRemoteDataSourceTest {
 
     private val objectMapper = ObjectMapper()
 
-    private val categoryRemoteDataSource = CategoryRemoteDataSource()
+    private val categoryRemoteDataSource = CategoryRemoteDataSource(ApiClient.TEST_INSTANCE)
 
     private val mockCategories = listOf(
         Category(1, "category1", 1),
         Category(2, "category2", 2)
     )
+
+    @Before
+    fun setUp() {
+        val mockClient = Retrofit.Builder()
+            .baseUrl("http://localhost:3000")
+            .addConverterFactory(JacksonConverterFactory.create(ObjectMapper().registerKotlinModule()))
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build()
+        ReflectionUtils.refectSetValue(categoryRemoteDataSource, "client", mockClient)
+    }
 
     @After
     fun tearDown() {

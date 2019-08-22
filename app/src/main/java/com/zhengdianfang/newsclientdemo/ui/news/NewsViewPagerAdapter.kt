@@ -10,7 +10,7 @@ class NewsViewPagerAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
     private val categories = mutableListOf<Category>()
 
     override fun getItem(position: Int): Fragment {
-        return NewsPagerFragment.getInstance(categories[position])
+        return NewsListFragment.getInstance(categories[position])
     }
 
     override fun getCount(): Int {

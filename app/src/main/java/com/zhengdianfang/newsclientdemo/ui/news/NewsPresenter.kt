@@ -8,7 +8,7 @@ class NewsPresenter: INewsContract.Presenter {
 
     private val newsRepository = NewsRepository()
 
-    override fun requestNewsList(category: Int) {
+    override fun requestNewsList(category: Long) {
         view?.let {
            newsRepository.getNewsList(category)
                .subscribe({data ->

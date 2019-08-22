@@ -4,7 +4,7 @@ data class News (
     val uniqueKey: String,
     val title: String,
     val date: String,
-    val category: Int,
+    val category: Long,
     val authorName: String,
     val url: String,
     val thumbnail1: String,
