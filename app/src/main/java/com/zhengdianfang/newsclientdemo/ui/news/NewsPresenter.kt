@@ -18,7 +18,8 @@ class NewsPresenter: INewsContract.Presenter {
                        it.showNewsList(data)
                    }
                }, { error ->
-                  error.printStackTrace()
+                   error.printStackTrace()
+                   it.showEmptyView()
                })
         }
     }

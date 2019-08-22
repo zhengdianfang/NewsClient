@@ -31,7 +31,6 @@ class NewsViewPagerActivityTest {
 
     @Test
     fun should_display_news_item_with_category_1() {
-        Thread.sleep(10* 1000)
         hasEntry(equalTo("STR"), `is`("王中王！德约一稳定江山，大满贯稳步追赶或成最终赢家"))
     }
 }

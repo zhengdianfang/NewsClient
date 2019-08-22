@@ -10,6 +10,5 @@ class CategoryRemoteDataSource(private val client: Retrofit) {
     fun getCategories(): Flowable<List<Category>> {
         return client.create(CategoryServices::class.java)
             .getCategories()
-            .onErrorResumeNext(Flowable.just(emptyList()))
     }
 }

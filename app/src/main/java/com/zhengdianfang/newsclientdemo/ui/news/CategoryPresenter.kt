@@ -22,7 +22,7 @@ class CategoryPresenter: ICategoryContract.IPresenter {
                 .subscribe({data ->
                     it.showCategories(data)
                 }, {error ->
-                   error.printStackTrace()
+                    error.printStackTrace()
                 })
         }
     }
