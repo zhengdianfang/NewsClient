@@ -5,7 +5,7 @@
         android:id="@+id/newsViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.news.NewsListActivity">
+        tools:context=".ui.news.NewsViewPagerActivity">
 
     <com.google.android.material.tabs.TabLayout
             android:id="@+id/newsTabLayout"

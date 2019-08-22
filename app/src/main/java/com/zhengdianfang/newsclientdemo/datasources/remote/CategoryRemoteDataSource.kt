@@ -13,7 +13,7 @@ class CategoryRemoteDataSource {
 
     private val client by lazy {
         Retrofit.Builder()
-            .baseUrl("http://localhost:3000")
+            .baseUrl("http://10.0.2.2:3000")
             .addConverterFactory(JacksonConverterFactory.create(ObjectMapper().registerKotlinModule()))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()

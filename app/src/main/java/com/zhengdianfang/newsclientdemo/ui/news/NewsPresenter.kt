@@ -2,7 +2,7 @@ package com.zhengdianfang.newsclientdemo.ui.news
 
 import com.zhengdianfang.newsclientdemo.repository.NewsRepository
 
-class NewsPresenter: INewsContract.Persenter {
+class NewsPresenter: INewsContract.Presenter {
 
     private var view: INewsContract.IView? = null
 

@@ -5,12 +5,12 @@ import com.zhengdianfang.newsclientdemo.mvp.IBasePresenter
 import com.zhengdianfang.newsclientdemo.mvp.IBaseView
 
 interface INewsContract {
-    interface IView: IBaseView<Persenter> {
+    interface IView: IBaseView<Presenter> {
         fun showNewsList(newsList: List<News>)
         fun showEmptyView()
     }
 
-    interface Persenter: IBasePresenter<IView> {
+    interface Presenter: IBasePresenter<IView> {
         fun requestNewsList(category: Int)
     }
 }
