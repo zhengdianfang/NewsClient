@@ -3,7 +3,7 @@ package com.zhengdianfang.newsclientdemo.datasources.remote
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.zhengdianfang.newsclientdemo.api.NewsServices
-import com.zhengdianfang.newsclientdemo.model.New
+import com.zhengdianfang.newsclientdemo.model.News
 import io.reactivex.Flowable
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -18,15 +18,15 @@ class NewRemoteDataSource {
             .build()
     }
 
-    fun getNews(category: Int): Flowable<List<New>> {
+    fun getNewsList(category: Int): Flowable<List<News>> {
         return client.create(NewsServices::class.java)
-            .getNews(category)
+            .getNewsList(category)
             .onErrorResumeNext(Flowable.empty())
     }
 
-    fun getNews(): Flowable<List<New>> {
+    fun getNewsList(): Flowable<List<News>> {
         return client.create(NewsServices::class.java)
-            .getNews(null)
+            .getNewsList(null)
             .onErrorResumeNext(Flowable.empty())
     }
 }

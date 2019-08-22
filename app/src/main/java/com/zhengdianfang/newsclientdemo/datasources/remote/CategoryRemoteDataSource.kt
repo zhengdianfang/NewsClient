@@ -3,9 +3,7 @@ package com.zhengdianfang.newsclientdemo.datasources.remote
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.zhengdianfang.newsclientdemo.api.CategoryServices
-import com.zhengdianfang.newsclientdemo.api.NewsServices
 import com.zhengdianfang.newsclientdemo.model.Category
-import com.zhengdianfang.newsclientdemo.model.New
 import io.reactivex.Flowable
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

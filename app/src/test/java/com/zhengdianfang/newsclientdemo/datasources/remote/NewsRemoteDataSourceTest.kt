@@ -1,7 +1,7 @@
 package com.zhengdianfang.newsclientdemo.datasources.remote
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.zhengdianfang.newsclientdemo.model.New
+import com.zhengdianfang.newsclientdemo.model.News
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.hamcrest.CoreMatchers.`is`
@@ -10,7 +10,7 @@ import org.junit.Assert.assertThat
 import org.junit.Test
 
 
-class NewRemoteDataSourceTest {
+class NewsRemoteDataSourceTest {
 
     private val newsRemoteDataSource = NewRemoteDataSource()
 
@@ -27,11 +27,11 @@ class NewRemoteDataSourceTest {
     fun `should get new list when request server api`() {
         //given
         val mockNews = listOf(
-            New("123", "title1",
+            News("123", "title1",
                 "2019.01.03", 1, "zdf",
                 "", "", "", ""),
 
-            New("341", "title2",
+            News("341", "title2",
                 "2019.01.03", 2, "zdf",
                 "", "", "", "")
         )
@@ -42,7 +42,7 @@ class NewRemoteDataSourceTest {
 
         mockServer.start(3000)
         //when
-        val testSubscriber = newsRemoteDataSource.getNews().test()
+        val testSubscriber = newsRemoteDataSource.getNewsList().test()
 
         //then
         testSubscriber.assertValue { data ->  data.isNotEmpty() && data.size == 2 && data.first().title == "title1" }
@@ -56,7 +56,7 @@ class NewRemoteDataSourceTest {
     fun `should get new list of category when request server api with category param`() {
         //given
         val mockNews = listOf(
-            New("123", "title1",
+            News("123", "title1",
                 "2019.01.03", 1, "zdf",
                 "", "", "", "")
         )
@@ -67,7 +67,7 @@ class NewRemoteDataSourceTest {
         mockServer.start(3000)
         //when
         val category = 1
-        val testSubscriber = newsRemoteDataSource.getNews(category).test()
+        val testSubscriber = newsRemoteDataSource.getNewsList(category).test()
 
         //then
         testSubscriber.assertValue { data ->  data.isNotEmpty() && data.size == 1 && data.first().category == 1 }
@@ -85,7 +85,7 @@ class NewRemoteDataSourceTest {
 
         mockServer.start(3000)
         //when
-        val testSubscriber = newsRemoteDataSource.getNews().test()
+        val testSubscriber = newsRemoteDataSource.getNewsList().test()
 
         //then
         testSubscriber.assertNoValues()

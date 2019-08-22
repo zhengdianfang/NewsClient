@@ -1,17 +1,15 @@
 package com.zhengdianfang.newsclientdemo.repository
 
 import com.zhengdianfang.newsclientdemo.datasources.remote.NewRemoteDataSource
-import com.zhengdianfang.newsclientdemo.model.New
+import com.zhengdianfang.newsclientdemo.model.News
 import com.zhengdianfang.newsclientdemo.utils.ReflectionUtils
 import io.reactivex.Flowable
-import org.junit.Before
 import org.junit.Test
-import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 
-class NewRepositoryTest {
+class NewsRepositoryTest {
 
     @Mock
     private lateinit var mockNewRemoteDataSource: NewRemoteDataSource
@@ -26,19 +24,19 @@ class NewRepositoryTest {
         //given
         val newRepository = NewRepository()
         val mockNews = listOf(
-            New("123", "title1",
+            News("123", "title1",
                 "2019.01.03", 1, "zdf",
                 "", "", "", ""),
 
-            New("341", "title2",
+            News("341", "title2",
                 "2019.01.03", 2, "zdf",
                 "", "", "", "")
         )
-        `when`(mockNewRemoteDataSource.getNews()).thenReturn(Flowable.just(mockNews))
+        `when`(mockNewRemoteDataSource.getNewsList()).thenReturn(Flowable.just(mockNews))
         ReflectionUtils.refectSetValue(newRepository, "newRemoteDataSource", mockNewRemoteDataSource)
 
         //when
-        val testSubscriber = newRepository.getNews(null).test()
+        val testSubscriber = newRepository.getNewsList(null).test()
 
         //then
         testSubscriber.assertValue { data ->
@@ -53,19 +51,19 @@ class NewRepositoryTest {
         //given
         val newRepository = NewRepository()
         val mockNews = listOf(
-            New("123", "title1",
+            News("123", "title1",
                 "2019.01.03", 1, "zdf",
                 "", "", "", ""),
 
-            New("341", "title2",
+            News("341", "title2",
                 "2019.01.03", 2, "zdf",
                 "", "", "", "")
         )
-        `when`(mockNewRemoteDataSource.getNews()).thenReturn(Flowable.just(mockNews))
+        `when`(mockNewRemoteDataSource.getNewsList()).thenReturn(Flowable.just(mockNews))
         ReflectionUtils.refectSetValue(newRepository, "newRemoteDataSource", mockNewRemoteDataSource)
 
         //when
-        val testSubscriber = newRepository.getNews(1).test()
+        val testSubscriber = newRepository.getNewsList(1).test()
 
         //then
         testSubscriber.assertValue { data ->
