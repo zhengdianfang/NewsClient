@@ -47,4 +47,29 @@ class NewRepositoryTest {
 
 
     }
+
+    @Test
+    fun `should return  new list of specified category when get form data source`() {
+        //given
+        val newRepository = NewRepository()
+        val mockNews = listOf(
+            New("123", "title1",
+                "2019.01.03", 1, "zdf",
+                "", "", "", ""),
+
+            New("341", "title2",
+                "2019.01.03", 2, "zdf",
+                "", "", "", "")
+        )
+        `when`(mockNewRemoteDataSource.getNews()).thenReturn(Flowable.just(mockNews))
+        ReflectionUtils.refectSetValue(newRepository, "newRemoteDataSource", mockNewRemoteDataSource)
+
+        //when
+        val testSubscriber = newRepository.getNews(1).test()
+
+        //then
+        testSubscriber.assertValue { data ->
+            data.isNotEmpty() && data.size == 1 && data.first().category == 1
+        }
+    }
 }
