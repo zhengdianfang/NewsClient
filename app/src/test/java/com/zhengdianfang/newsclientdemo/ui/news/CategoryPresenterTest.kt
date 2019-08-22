@@ -8,6 +8,7 @@ import io.reactivex.Flowable
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
+import org.mockito.MockitoAnnotations
 
 class CategoryPresenterTest {
 
@@ -16,6 +17,10 @@ class CategoryPresenterTest {
 
     @Mock
     private lateinit var mockView: ICategoryContract.IView
+
+    init {
+        MockitoAnnotations.initMocks(this)
+    }
 
     @Test
     fun `should execute showCategories function when receiver categories data from server`() {
