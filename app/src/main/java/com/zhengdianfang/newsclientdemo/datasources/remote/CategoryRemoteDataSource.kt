@@ -22,6 +22,6 @@ class CategoryRemoteDataSource {
     fun getCategories(): Flowable<List<Category>> {
         return client.create(CategoryServices::class.java)
             .getCategories()
-            .onErrorResumeNext(Flowable.empty())
+            .onErrorResumeNext(Flowable.just(emptyList()))
     }
 }

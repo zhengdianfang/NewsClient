@@ -60,7 +60,7 @@ class CategoryRemoteDataSourceTest {
         val testSubscriber = categoryRemoteDataSource.getCategories().test()
 
         //then
-        testSubscriber.assertNoValues()
+        testSubscriber.assertValue { data -> data.isEmpty() }
         val takeRequest = mockWebServer.takeRequest()
         assertThat(takeRequest.path, `is`("/categories"))
         assertThat(takeRequest.method, `is`("GET"))

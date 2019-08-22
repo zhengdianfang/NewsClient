@@ -4,16 +4,29 @@ import com.zhengdianfang.newsclientdemo.datasources.remote.CategoryRemoteDataSou
 import com.zhengdianfang.newsclientdemo.model.Category
 import com.zhengdianfang.newsclientdemo.utils.ReflectionUtils
 import io.reactivex.Flowable
+import io.reactivex.android.plugins.RxAndroidPlugins
+import io.reactivex.schedulers.Schedulers
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
+import com.zhengdianfang.newsclientdemo.utils.RxImmediateSchedulerRule
+import org.junit.ClassRule
+
+
 
 class CategoryRepositoryTest {
 
     @Mock
     private lateinit var mockCategoryRemoteDataSource: CategoryRemoteDataSource
 
+    companion object {
+        @ClassRule
+        @JvmField
+        val schedulers = RxImmediateSchedulerRule()
+    }
 
     init {
         MockitoAnnotations.initMocks(this)

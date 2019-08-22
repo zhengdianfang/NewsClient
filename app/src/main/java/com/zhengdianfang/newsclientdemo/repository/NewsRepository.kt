@@ -1,15 +1,14 @@
 package com.zhengdianfang.newsclientdemo.repository
 
-import com.zhengdianfang.newsclientdemo.datasources.remote.NewRemoteDataSource
+import com.zhengdianfang.newsclientdemo.datasources.remote.NewsRemoteDataSource
 import com.zhengdianfang.newsclientdemo.model.News
 import io.reactivex.Flowable
-import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class NewRepository {
+class NewsRepository {
 
-    private val newRemoteDataSource = NewRemoteDataSource()
+    private val newRemoteDataSource = NewsRemoteDataSource()
 
     fun getNewsList(category: Int?): Flowable<List<News>> {
         return newRemoteDataSource.getNewsList()

@@ -12,7 +12,7 @@ import org.junit.Test
 
 class NewsRemoteDataSourceTest {
 
-    private val newsRemoteDataSource = NewRemoteDataSource()
+    private val newsRemoteDataSource = NewsRemoteDataSource()
 
     private val objectMapper = ObjectMapper()
 
@@ -88,7 +88,7 @@ class NewsRemoteDataSourceTest {
         val testSubscriber = newsRemoteDataSource.getNewsList().test()
 
         //then
-        testSubscriber.assertNoValues()
+        testSubscriber.assertValue { data -> data.isEmpty() }
         val takeRequest = mockServer.takeRequest()
         assertThat(takeRequest.path, `is`("/news"))
         assertThat(takeRequest.method, `is`("GET"))
