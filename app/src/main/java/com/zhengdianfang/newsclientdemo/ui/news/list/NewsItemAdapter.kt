@@ -1,4 +1,4 @@
-package com.zhengdianfang.newsclientdemo.ui.news
+package com.zhengdianfang.newsclientdemo.ui.news.list
 
 import android.view.LayoutInflater
 import android.view.View

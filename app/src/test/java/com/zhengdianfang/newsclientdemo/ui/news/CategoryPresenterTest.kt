@@ -3,6 +3,8 @@ package com.zhengdianfang.newsclientdemo.ui.news
 import com.nhaarman.mockitokotlin2.verify
 import com.zhengdianfang.newsclientdemo.model.Category
 import com.zhengdianfang.newsclientdemo.repository.CategoryRepository
+import com.zhengdianfang.newsclientdemo.ui.news.main.CategoryPresenter
+import com.zhengdianfang.newsclientdemo.ui.news.main.ICategoryContract
 import com.zhengdianfang.newsclientdemo.utils.ReflectionUtils
 import io.reactivex.Flowable
 import org.junit.Test

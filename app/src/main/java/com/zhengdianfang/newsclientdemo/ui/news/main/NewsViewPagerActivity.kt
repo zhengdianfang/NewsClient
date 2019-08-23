@@ -1,4 +1,4 @@
-package com.zhengdianfang.newsclientdemo.ui.news
+package com.zhengdianfang.newsclientdemo.ui.news.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,11 +6,13 @@ import com.zhengdianfang.newsclientdemo.R
 import com.zhengdianfang.newsclientdemo.model.Category
 import kotlinx.android.synthetic.main.activity_news_viewpager.*
 
-class NewsViewPagerActivity : AppCompatActivity(), ICategoryContract.IView {
+class NewsViewPagerActivity : AppCompatActivity(),
+    ICategoryContract.IView {
 
     private var categoryPresenter = CategoryPresenter()
 
-    private val viewPagerAdapter = NewsViewPagerAdapter(supportFragmentManager)
+    private val viewPagerAdapter =
+        NewsViewPagerAdapter(supportFragmentManager)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

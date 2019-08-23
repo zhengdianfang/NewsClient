@@ -3,14 +3,14 @@ package com.zhengdianfang.newsclientdemo.ui.news
 import com.nhaarman.mockitokotlin2.verify
 import com.zhengdianfang.newsclientdemo.model.News
 import com.zhengdianfang.newsclientdemo.repository.NewsRepository
+import com.zhengdianfang.newsclientdemo.ui.news.list.INewsContract
+import com.zhengdianfang.newsclientdemo.ui.news.list.NewsPresenter
 import com.zhengdianfang.newsclientdemo.utils.ReflectionUtils
 import io.reactivex.Flowable
 import org.junit.Test
-import org.mockito.ArgumentMatchers
 import org.mockito.ArgumentMatchers.anyLong
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.Mockito.anyInt
 import org.mockito.MockitoAnnotations
 
 class NewsPresenterTest {

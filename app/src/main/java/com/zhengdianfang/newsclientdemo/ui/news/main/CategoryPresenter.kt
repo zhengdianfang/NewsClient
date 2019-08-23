@@ -1,4 +1,4 @@
-package com.zhengdianfang.newsclientdemo.ui.news
+package com.zhengdianfang.newsclientdemo.ui.news.main
 
 import com.zhengdianfang.newsclientdemo.repository.CategoryRepository
 

@@ -1,9 +1,10 @@
-package com.zhengdianfang.newsclientdemo.ui.news
+package com.zhengdianfang.newsclientdemo.ui.news.main
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.zhengdianfang.newsclientdemo.model.Category
+import com.zhengdianfang.newsclientdemo.ui.news.list.NewsListFragment
 
 class NewsViewPagerAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
 
