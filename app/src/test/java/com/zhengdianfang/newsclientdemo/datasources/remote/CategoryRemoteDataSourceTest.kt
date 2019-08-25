@@ -24,20 +24,11 @@ class CategoryRemoteDataSourceTest {
 
     private val categoryRemoteDataSource = CategoryRemoteDataSource(ApiClient.TEST_INSTANCE)
 
+
     private val mockCategories = listOf(
         Category(1, "category1", 1),
         Category(2, "category2", 2)
     )
-
-    @Before
-    fun setUp() {
-        val mockClient = Retrofit.Builder()
-            .baseUrl("http://localhost:3000")
-            .addConverterFactory(JacksonConverterFactory.create(ObjectMapper().registerKotlinModule()))
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
-        ReflectionUtils.refectSetValue(categoryRemoteDataSource, "client", mockClient)
-    }
 
     @After
     fun tearDown() {
@@ -77,7 +68,7 @@ class CategoryRemoteDataSourceTest {
         val testSubscriber = categoryRemoteDataSource.getCategories().test()
 
         //then
-        testSubscriber.assertValue { data -> data.isEmpty() }
+        testSubscriber.assertErrorMessage("HTTP 500 Server Error")
         val takeRequest = mockWebServer.takeRequest()
         assertThat(takeRequest.path, `is`("/categories"))
         assertThat(takeRequest.method, `is`("GET"))

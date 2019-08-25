@@ -15,8 +15,6 @@ class NewsRemoteDataSourceTest {
 
     private val newsRemoteDataSource = NewsRemoteDataSource(ApiClient.TEST_INSTANCE)
 
-    private val objectMapper = ObjectMapper()
-
     private val mockServer = MockWebServer()
 
     @After
@@ -37,9 +35,11 @@ class NewsRemoteDataSourceTest {
                 "", "", "", "")
         )
 
+        val body = ApiClient.JSON.writeValueAsString(mockNews)
+        print(body)
         mockServer.enqueue(MockResponse()
             .setResponseCode(200)
-            .setBody(objectMapper.writeValueAsString(mockNews)))
+            .setBody(body))
 
         mockServer.start(3000)
         //when
@@ -63,7 +63,7 @@ class NewsRemoteDataSourceTest {
         )
         mockServer.enqueue(MockResponse()
             .setResponseCode(200)
-            .setBody(objectMapper.writeValueAsString(mockNews)))
+            .setBody(ApiClient.JSON.writeValueAsString(mockNews)))
 
         mockServer.start(3000)
         //when
@@ -89,7 +89,7 @@ class NewsRemoteDataSourceTest {
         val testSubscriber = newsRemoteDataSource.getNewsList().test()
 
         //then
-        testSubscriber.assertValue { data -> data.isEmpty() }
+        testSubscriber.assertErrorMessage("HTTP 500 Server Error")
         val takeRequest = mockServer.takeRequest()
         assertThat(takeRequest.path, `is`("/news"))
         assertThat(takeRequest.method, `is`("GET"))
