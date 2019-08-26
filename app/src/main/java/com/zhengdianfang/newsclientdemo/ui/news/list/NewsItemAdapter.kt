@@ -3,8 +3,10 @@ package com.zhengdianfang.newsclientdemo.ui.news.list
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.zhengdianfang.newsclientdemo.R
 import com.zhengdianfang.newsclientdemo.model.News
 
@@ -36,7 +38,9 @@ class NewsItemAdapter: RecyclerView.Adapter<NewsItemAdapter.NewsItemViewHolder>(
     inner class NewsItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(news: News) {
             val titleView = itemView.findViewById<TextView>(R.id.titleView)
+            val bannerImage = itemView.findViewById<ImageView>(R.id.bannerImage)
             titleView.text = news.title
+            Glide.with(itemView.context).load(news.thumbnail1).into(bannerImage)
         }
     }
 }
