@@ -20,6 +20,8 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
-#before_script:
-#    - ./gradlew test
+before_script:
+    - ./gradlew test
 #    - ./gradlew connectedAndroidTest
+script:
+    - ./gradlew build
